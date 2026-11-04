@@ -4,6 +4,11 @@ from langchain_groq import ChatGroq
 from langchain.agents import create_agent
 
 from app.agent.prompts import SYSTEM_PROMPT
+from app.util.constant import (
+    USER_REQUEST_PROCESSING,
+    AGENT_RESPONSE_GENERATED,
+    AGENT_EXECUTION_FAILED,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +22,7 @@ class AgentService:
         )
 
     def generate_response(self, user_message: str) -> str:
-        logger.info("Processing user request.")
+        logger.info(USER_REQUEST_PROCESSING)
         messages = [
             {
                 "role": "user",
@@ -25,11 +30,10 @@ class AgentService:
             }
         ]
         agent_input = {"messages": messages}
-        response = self.agent.invoke(input=agent_input)
-
-        # print(response)
-
-        print("======================================")
-        print("Response: ", response)
-        print("======================================")
-        return response["messages"][-1].content
+        try:
+            response = self.agent.invoke(input=agent_input)
+            logger.info(AGENT_RESPONSE_GENERATED)
+            return response["messages"][-1].content
+        except Exception:
+            logger.exception(AGENT_EXECUTION_FAILED)
+            raise

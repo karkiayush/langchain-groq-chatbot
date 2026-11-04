@@ -19,7 +19,6 @@ def create_web_search_tool():
         """
         logger.info("Web search started: %s", query)
 
-
         try:
             results = search.run(query)
             logger.info("Web search completed successfully.")

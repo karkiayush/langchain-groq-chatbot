@@ -1,7 +1,7 @@
 from langchain_groq import ChatGroq
 from app.config.settings import settings
 
-from app.utils.constant import API_KEY_MISSING
+from app.util.constant import API_KEY_MISSING
 
 
 def get_groq_llm() -> ChatGroq:

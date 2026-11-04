@@ -10,5 +10,8 @@ class Settings(BaseSettings):
     GROQ_MODEL: str = "openai/gpt-oss-120b"
     GROQ_TEMPERATURE: float
 
+    # Server api key for agentic feat
+    SERPER_API_KEY: str
+
 
 settings = Settings()

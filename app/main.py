@@ -1,12 +1,18 @@
-from app.chatbot.service import ChatbotService
+from app.agent.service import AgentService
+from app.tool.web_search import create_web_search_tool
 from app.llm.groq_client import get_groq_llm
+from app.util.logger import setup_logger
 
 
 def main():
-    llm = get_groq_llm()
-    chatbot_service = ChatbotService(llm=llm)
+    setup_logger()
 
-    print("\n===== LangChain Groq Chatbot =====")
+    llm = get_groq_llm()
+    search_tool = create_web_search_tool()
+
+    agent = AgentService(llm=llm, tools=[search_tool])
+
+    print("\n===== Groq AI Agent =====")
     print("Type 'exit' to quit.\n")
 
     while True:
@@ -19,7 +25,7 @@ def main():
         if not user_message:
             continue
 
-        response = chatbot_service.generate_response(user_message=user_message)
+        response = agent.generate_response(user_message=user_message)
         print(f"Assistant: {response}\n")
 
 

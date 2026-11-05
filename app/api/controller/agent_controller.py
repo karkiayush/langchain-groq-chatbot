@@ -1,6 +1,6 @@
 import logging
 
-from app.agent.service import AgentService
+from app.agent.agent_service import AgentService
 from app.schema.agent_schema import AgentRequest, AgentResponse
 
 logger = logging.getLogger(__name__)

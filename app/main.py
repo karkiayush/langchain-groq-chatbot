@@ -1,47 +1,9 @@
-# from fastapi import FastAPI
-# from langserve import add_routes
-#
-# from app.agent.service import AgentService
-# from app.tool.web_search import create_web_search_tool
-# from app.llm.groq_client import get_groq_llm
-# from app.util.logger import setup_logger
-#
-#
-# def main():
-#     setup_logger()
-#
-#     llm = get_groq_llm()
-#     search_tool = create_web_search_tool()
-#
-#     agent = AgentService(llm=llm, tools=[search_tool])
-#
-#     print("\n===== Groq AI Agent =====")
-#     print("Type 'exit' to quit.\n")
-#
-#     while True:
-#         user_message = input("You: ").strip()
-#
-#         if user_message.lower() == "exit":
-#             print("Goodbye 👋")
-#             break
-#
-#         if not user_message:
-#             continue
-#
-#         response = agent.generate_response(user_message=user_message)
-#         print(f"Assistant: {response}\n")
-#
-#
-# if __name__ == "__main__":
-#     main()
-
-
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from langserve import add_routes
 
-from app.agent.service import AgentService
+from app.agent.agent_service import AgentService
 from app.tool.web_search import create_web_search_tool
 from app.llm.groq_client import get_groq_llm
 from app.api.route.agent_router import router
@@ -62,7 +24,13 @@ async def lifespan(app: FastAPI):
         tools=[search_tool],
     )
 
-    # Store shared service in application state
+    # Store the initialized AgentService in application state.
+    # app.state allows us to share application-level objects (e.g., services,
+    # database connections, Redis clients) across different parts of the application.
+    #
+    # This avoids reinitializing the LLM, tools, and agent for every incoming request.
+    # The same AgentService instance can be retrieved through request.app.state
+    # and injected into route handlers using FastAPI's Depends().
     app.state.agent_service = agent_service
 
     yield
@@ -78,11 +46,4 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-
-# Register custom REST API routes
 app.include_router(router)
-
-
-# Expose LangChain agent through LangServe
-# This is an additional interface, separate from our custom REST API.
-# See the LangServe explanation below.

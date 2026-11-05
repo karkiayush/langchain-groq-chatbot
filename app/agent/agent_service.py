@@ -3,7 +3,7 @@ import logging
 from langchain_groq import ChatGroq
 from langchain.agents import create_agent
 
-from app.agent.prompts import SYSTEM_PROMPT
+from app.agent.agent_prompt import SYSTEM_PROMPT
 from app.util.constant import (
     USER_REQUEST_PROCESSING,
     AGENT_RESPONSE_GENERATED,

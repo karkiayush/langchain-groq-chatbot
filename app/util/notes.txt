@@ -1,0 +1,18 @@
+LangServe is a library that allows you to expose LangChain components (chains, agents, and other runnable) as REST APIs.
+
+It provides features such as:
+- Standardized API endpoints for invoking LangChain components.
+- Input/output schemas.
+- Streaming responses.
+- Batch execution.
+- Playground interface for testing your LangChain application.
+
+In your project, you have two possible ways to expose your agent:
+_______________________________________________________________________________________
+| Custom FastAPI API                    | LangServe API                                |
+|---------------------------------------|----------------------------------------------|
+| You define your own endpoints.        | LangServe automatically generates endpoints. |
+| You control request/response schemas. | Uses LangChain Runnable schemas.             |
+| You implement controller logic.       | LangServe handles invocation.                |
+| Custom business logic and validation. | Standardized LangChain interface.            |
+----------------------------------------------------------------------------------------

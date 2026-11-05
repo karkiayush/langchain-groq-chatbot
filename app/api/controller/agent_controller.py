@@ -13,5 +13,4 @@ def generate_agent_response(
     logger.info("Agent API request received.")
 
     response = agent_service.generate_response(user_message=request.message)
-
     return AgentResponse(response=response)

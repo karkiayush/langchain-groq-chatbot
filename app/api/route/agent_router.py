@@ -4,7 +4,10 @@ from app.agent.agent_service import AgentService
 from app.api.controller import agent_controller
 from app.schema.agent_schema import AgentRequest, AgentResponse
 
-router = APIRouter(prefix="/api/v1/agent", tags=["AI Agent"])
+router = APIRouter(
+    prefix="/api/v1/agent",
+    tags=["AI Agent"],
+)
 
 
 def get_agent_service(request: Request) -> AgentService:

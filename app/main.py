@@ -12,8 +12,6 @@ from app.util.logger import setup_logger
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-
-    # Application startup
     setup_logger()
 
     llm = get_groq_llm()
@@ -34,8 +32,6 @@ async def lifespan(app: FastAPI):
     app.state.agent_service = agent_service
 
     yield
-
-    # Application shutdown
     app.state.agent_service = None
 
 

@@ -53,8 +53,4 @@ app.state.agent_service = agent_service
 app.include_router(router)
 
 # exposing the langchain agent through langserve
-add_routes(
-    app,
-    agent_service.agent,
-    path="/langserve/agent"
-)
+add_routes(app, agent_service.agent, path="/langserve/agent")

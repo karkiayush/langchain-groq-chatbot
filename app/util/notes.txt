@@ -16,3 +16,29 @@ ________________________________________________________________________________
 | You implement controller logic.       | LangServe handles invocation.                |
 | Custom business logic and validation. | Standardized LangChain interface.            |
 ----------------------------------------------------------------------------------------
+
+
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     setup_logger()
+#
+#     llm = get_groq_llm()
+#     search_tool = create_web_search_tool()
+#
+#     agent_service = AgentService(
+#         llm=llm,
+#         tools=[search_tool],
+#     )
+#
+#     # Store the initialized AgentService in application state.
+#     # app.state allows us to share application-level objects (e.g., services,
+#     # database connections, Redis clients) across different parts of the application.
+#     #
+#     # This avoids reinitializing the LLM, tools, and agent for every incoming request.
+#     # The same AgentService instance can be retrieved through request.app.state
+#     # and injected into route handlers using FastAPI's Depends().
+#     app.state.agent_service = agent_service
+#
+#     yield
+#     app.state.agent_service = None
+

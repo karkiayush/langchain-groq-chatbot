@@ -334,21 +334,6 @@ The main concepts explored include:
 - Understanding tracing and observability with LangSmith.
 - Connecting a dedicated chat frontend to a backend agent.
 
-## Future Improvements
-
-The project will continue to evolve as I explore more advanced AI engineering concepts.
-
-- [ ] Add conversation memory and persistent chat history.
-- [ ] Implement structured input and output schemas.
-- [ ] Add more external tools and API integrations.
-- [ ] Explore human-in-the-loop workflows.
-- [ ] Implement RAG with document ingestion and retrieval.
-- [ ] Integrate vector databases.
-- [ ] Explore Model Context Protocol (MCP).
-- [ ] Add automated tests for agent and API behavior.
-- [ ] Implement agent evaluation and performance monitoring.
-- [ ] Improve error handling and production configuration.
-
 ## Acknowledgements
 
 This project was developed as a hands-on learning exercise while exploring the Python AI ecosystem, particularly LangChain, LangGraph and the integration of LLMs with external tools.

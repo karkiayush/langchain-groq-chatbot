@@ -28,3 +28,4 @@ build/
 
 # LangGraph local development files
 .langgraph_api/
+./app/util/notes.txt
